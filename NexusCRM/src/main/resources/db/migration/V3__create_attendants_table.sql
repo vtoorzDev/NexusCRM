@@ -1,0 +1,7 @@
+CREATE TABLE attendants(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR (255) NOT NULL,
+    email VARCHAR (255) NOT NULL,
+    role VARCHAR (255)  NOT NULL ,
+    status VARCHAR (255) NOT NULL
+);
