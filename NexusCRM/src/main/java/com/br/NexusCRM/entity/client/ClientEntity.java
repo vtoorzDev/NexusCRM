@@ -19,5 +19,12 @@ public class ClientEntity {
     private String phone;
     private String companyClient;
     private LocalDateTime registrationDate = LocalDateTime.now();
-    private boolean status;
+
+
+    private enum ClientStatus{
+        ACTIVE,
+        INACTIVE
+    }
+    @Enumerated(EnumType.STRING)
+    private ClientStatus clientStatus;
 }
