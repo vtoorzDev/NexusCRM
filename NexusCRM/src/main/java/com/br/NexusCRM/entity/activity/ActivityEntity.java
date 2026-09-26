@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "activitys")
+@Table(name = "activities")
 public class ActivityEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,9 +28,14 @@ public class ActivityEntity {
        CANCELED
    }
    @Enumerated(EnumType.STRING)
-   private ActivityEntity activityEntity;
-   
+   private ActivityStatus activityStatus;
+
+   @ManyToOne
+   @JoinColumn(name = "client_id", nullable = false)
    private ClientEntity client;
+
+   @ManyToOne
+   @JoinColumn(name = "attendant_id", nullable = false)
    private AttendantEntity attendant;
 
 }
