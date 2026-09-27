@@ -27,4 +27,9 @@ public class AttendantController {
     public List<AttendantResponseDTO> listAllAttendants() {
         return attendantService.listAllAttendants();
     }
+
+    @GetMapping("/list/{id}")
+    public AttendantResponseDTO listAttendantId(@PathVariable Long id) {
+        return attendantService.listAttendantId(id);
+    }
 }
