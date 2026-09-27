@@ -32,4 +32,9 @@ public class AttendantController {
     public AttendantResponseDTO listAttendantId(@PathVariable Long id) {
         return attendantService.listAttendantId(id);
     }
+
+    @PutMapping("/update/{id}")
+    public AttendantResponseDTO updateAttendant(@PathVariable Long id,  @RequestBody @Valid  AttendantRequestDTO attendantRequestDTO ) {
+        return attendantService.updateAttendant(attendantRequestDTO, id);
+    }
 }
