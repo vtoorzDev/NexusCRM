@@ -4,10 +4,9 @@ import com.br.NexusCRM.dto.requestDTO.attendant.AttendantRequestDTO;
 import com.br.NexusCRM.dto.responseDTO.attendant.AttendantResponseDTO;
 import com.br.NexusCRM.service.attendant.AttendantService;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/attendants")
@@ -22,5 +21,10 @@ public class AttendantController {
     @PostMapping("/register")
     public AttendantResponseDTO registerAttendant (@Valid @RequestBody AttendantRequestDTO attendantRequestDTO) {
         return attendantService.registerAttendant(attendantRequestDTO);
+    }
+
+    @GetMapping("/listAll")
+    public List<AttendantResponseDTO> listAllAttendants() {
+        return attendantService.listAllAttendants();
     }
 }
