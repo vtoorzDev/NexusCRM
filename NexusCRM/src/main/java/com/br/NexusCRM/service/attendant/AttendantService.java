@@ -51,4 +51,12 @@ public class AttendantService {
     public List<AttendantResponseDTO> listAllAttendants(){
         return attendantRepository.findAll().stream().map(this::transformResponse).toList();
     }
+    public AttendantResponseDTO listAttendantId(Long id) {
+        Optional<AttendantEntity> attendantFound = attendantRepository.findById(id);
+
+        if (attendantFound.isEmpty()) {
+            throw new AttendantException("Attendant not found");
+        }
+        return transformResponse(attendantFound.get());
+    }
 }
