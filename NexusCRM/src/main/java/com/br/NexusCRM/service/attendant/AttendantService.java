@@ -59,4 +59,26 @@ public class AttendantService {
         }
         return transformResponse(attendantFound.get());
     }
+
+    public AttendantResponseDTO updateAttendant(AttendantRequestDTO attendantRequestDTO, Long id) {
+       Optional<AttendantEntity> attendantFound = attendantRepository.findById(id);
+
+       if (attendantFound.isEmpty()) {
+           throw new AttendantException("Attendant not found");
+       }
+
+       AttendantEntity attendant = attendantFound.get();
+
+       if (!attendant.getEmail().equals(attendantRequestDTO.getEmail())  && attendantRepository.existsByEmail(attendantRequestDTO.getEmail())) {
+           throw new AttendantException("email is already registered");
+       }
+
+       attendant.setName(attendantRequestDTO.getName());
+       attendant.setRole(attendantRequestDTO.getRole());
+       attendant.setEmail(attendantRequestDTO.getEmail());
+
+       attendantRepository.save(attendant);
+
+       return transformResponse(attendant);
+    }
 }
