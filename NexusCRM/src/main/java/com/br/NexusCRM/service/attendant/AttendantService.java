@@ -8,6 +8,7 @@ import com.br.NexusCRM.repository.attendant.AttendantRepository;
 import jdk.dynalink.Operation;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -45,5 +46,9 @@ public class AttendantService {
         attendantRepository.save(attendantRegistered);
 
         return transformResponse(attendantRegistered);
+    }
+
+    public List<AttendantResponseDTO> listAllAttendants(){
+        return attendantRepository.findAll().stream().map(this::transformResponse).toList();
     }
 }
