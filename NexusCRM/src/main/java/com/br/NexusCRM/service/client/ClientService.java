@@ -3,11 +3,11 @@ package com.br.NexusCRM.service.client;
 import com.br.NexusCRM.dto.requestDTO.client.ClientRequestDTO;
 import com.br.NexusCRM.dto.responseDTO.client.ClientResponseDTO;
 import com.br.NexusCRM.entity.client.ClientEntity;
-import com.br.NexusCRM.exceptions.client.ClienteException;
+import com.br.NexusCRM.exceptions.client.ClientException;
 import com.br.NexusCRM.repository.client.ClientRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class ClientService {
@@ -33,7 +33,7 @@ public class ClientService {
 
     public ClientResponseDTO registerClient(ClientRequestDTO clientRequestDTO) {
         if (clientRepository.existsByEmail(clientRequestDTO.getEmail())) {
-            throw new ClienteException("Client is registred");
+            throw new ClientException("Client is registred");
         }
         ClientEntity clientEntity = new ClientEntity();
 
@@ -46,4 +46,8 @@ public class ClientService {
         clientRepository.save(clientEntity);
         return transformResponse(clientEntity);
         }
+
+    public List<ClientResponseDTO> listAllClients(){
+        return clientRepository.findAll().stream().map(this::transformResponse).toList();
+    }
 }
