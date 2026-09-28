@@ -91,6 +91,15 @@ public class ClientService {
         clientRepository.save(clientEntity);
 
         return transformResponse(clientEntity);
-
         }
+
+    public void deleteClient(Long id) {
+        Optional<ClientEntity> clientFound = clientRepository.findById(id);
+
+        if (clientFound.isEmpty()){
+            throw new ClientException("Client not found");
+        }
+        ClientEntity clientEntity = clientFound.get();
+        clientRepository.delete(clientEntity);
+    }
 }
