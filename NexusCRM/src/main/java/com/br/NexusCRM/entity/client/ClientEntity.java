@@ -21,7 +21,7 @@ public class ClientEntity {
     private LocalDateTime registrationDate = LocalDateTime.now();
 
 
-    private enum ClientStatus{
+    public enum ClientStatus{
         ACTIVE,
         INACTIVE
     }
