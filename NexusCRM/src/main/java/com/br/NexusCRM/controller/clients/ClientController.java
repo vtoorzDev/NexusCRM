@@ -1,9 +1,22 @@
 package com.br.NexusCRM.controller.clients;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.br.NexusCRM.dto.requestDTO.client.ClientRequestDTO;
+import com.br.NexusCRM.dto.responseDTO.client.ClientResponseDTO;
+import com.br.NexusCRM.service.client.ClientService;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/clients")
 public class ClientController {
+    private final ClientService clientService;
+
+    public ClientController(ClientService clientService) {
+        this.clientService = clientService;
+    }
+
+    @PostMapping("/register")
+    public ClientResponseDTO registerClient (@Valid @RequestBody ClientRequestDTO clientRequestDTO) {
+        return clientService.registerClient(clientRequestDTO);
+    }
 }

@@ -31,7 +31,7 @@ public class ClientService {
         return clientResponseDTO;
     }
 
-    public ClientResponseDTO registerClient(ClientRequestDTO clientRequestDTO, Long id) {
+    public ClientResponseDTO registerClient(ClientRequestDTO clientRequestDTO) {
         if (clientRepository.existsByEmail(clientRequestDTO.getEmail())) {
             throw new ClienteException("Client is registred");
         }
