@@ -37,4 +37,9 @@ public class AttendantController {
     public AttendantResponseDTO updateAttendant(@PathVariable Long id,  @RequestBody @Valid  AttendantRequestDTO attendantRequestDTO ) {
         return attendantService.updateAttendant(attendantRequestDTO, id);
     }
+
+    @PutMapping("/activate/{id}")
+    public AttendantResponseDTO activateAttendant(@PathVariable Long id) {
+        return attendantService.activateAttendant(id);
+    }
 }
