@@ -41,4 +41,9 @@ public class ClientController {
     public ClientResponseDTO inactiveClient(@PathVariable Long id) {
         return clientService.inactiveClient(id);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteClient(@PathVariable Long id){
+        clientService.deleteClient(id);
+    }
 }
