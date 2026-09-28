@@ -36,4 +36,9 @@ public class ClientController {
     public ClientResponseDTO updateClient(@Valid @RequestBody ClientRequestDTO clientRequestDTO, @PathVariable Long id) {
         return clientService.updateClient(clientRequestDTO, id);
     }
+
+    @PutMapping("/inactive/{id}")
+    public ClientResponseDTO inactiveClient(@PathVariable Long id) {
+        return clientService.inactiveClient(id);
+    }
 }
