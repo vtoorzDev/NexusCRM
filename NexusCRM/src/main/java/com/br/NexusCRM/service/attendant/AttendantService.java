@@ -111,4 +111,15 @@ public class AttendantService {
 
         return transformResponse(attendant);
     }
+
+    public void deleteAttendant(Long id) {
+        Optional<AttendantEntity> attendantFound = attendantRepository.findById(id);
+
+        if (attendantFound.isEmpty()) {
+            throw new AttendantException("Attendant not found");
+        }
+
+        AttendantEntity attendant = attendantFound.get();
+        attendantRepository.delete(attendant);
+    }
 }
