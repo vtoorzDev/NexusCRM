@@ -42,4 +42,9 @@ public class AttendantController {
     public AttendantResponseDTO activateAttendant(@PathVariable Long id) {
         return attendantService.activateAttendant(id);
     }
+
+    @PutMapping("/desactive/{id}")
+    public AttendantResponseDTO desactivateAttendant(Long id) {
+        return attendantService.desactivateAttendant(id);
+    }
 }
