@@ -8,6 +8,7 @@ import com.br.NexusCRM.repository.client.ClientRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -49,5 +50,14 @@ public class ClientService {
 
     public List<ClientResponseDTO> listAllClients(){
         return clientRepository.findAll().stream().map(this::transformResponse).toList();
+    }
+
+    public ClientResponseDTO listClientById(Long id) {
+        Optional<ClientEntity> clientFound = clientRepository.findById(id);
+
+        if (clientFound.isEmpty()){
+            throw new ClientException("Client not found");
+        }
+        return transformResponse(clientFound.get());
     }
 }
