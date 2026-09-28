@@ -78,4 +78,19 @@ public class ClientService {
         clientRepository.save(clientEntity);
         return transformResponse(clientEntity);
     }
+
+    public ClientResponseDTO inactiveClient(Long id){
+        Optional<ClientEntity> clientFound = clientRepository.findById(id);
+
+        if (clientFound.isEmpty()){
+            throw new ClientException("Client not found");
+    }
+        ClientEntity clientEntity = clientFound.get();
+
+        clientEntity.setClientStatus(ClientEntity.ClientStatus.INACTIVE);
+        clientRepository.save(clientEntity);
+
+        return transformResponse(clientEntity);
+
+        }
 }
