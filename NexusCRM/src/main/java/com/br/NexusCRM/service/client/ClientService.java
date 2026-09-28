@@ -60,4 +60,22 @@ public class ClientService {
         }
         return transformResponse(clientFound.get());
     }
+
+    public ClientResponseDTO updateClient(ClientRequestDTO clientRequestDTO, Long id) {
+        Optional<ClientEntity> clientFound = clientRepository.findById(id);
+
+        if (clientFound.isEmpty()) {
+            throw new ClientException("Client not found");
+        }
+
+        ClientEntity clientEntity = clientFound.get();
+
+        clientEntity.setName(clientRequestDTO.getName());
+        clientEntity.setEmail(clientRequestDTO.getEmail());
+        clientEntity.setPhone(clientRequestDTO.getPhone());
+        clientEntity.setCompanyClient(clientRequestDTO.getCompanyClient());
+
+        clientRepository.save(clientEntity);
+        return transformResponse(clientEntity);
+    }
 }
