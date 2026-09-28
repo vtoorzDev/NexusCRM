@@ -96,4 +96,19 @@ public class AttendantService {
 
         return transformResponse(attendant);
     }
+
+    public AttendantResponseDTO desactivateAttendant(Long id) {
+        Optional<AttendantEntity> attendantFound = attendantRepository.findById(id);
+
+        if (attendantFound.isEmpty()) {
+            throw new AttendantException("Attendant not found");
+        }
+
+        AttendantEntity attendant = attendantFound.get();
+
+        attendant.setStatus(AttendantEntity.AttendantStatus.INACTIVE);
+        attendantRepository.save(attendant);
+
+        return transformResponse(attendant);
+    }
 }
