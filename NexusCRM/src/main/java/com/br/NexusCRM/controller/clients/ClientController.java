@@ -6,6 +6,8 @@ import com.br.NexusCRM.service.client.ClientService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/clients")
 public class ClientController {
@@ -19,4 +21,9 @@ public class ClientController {
     public ClientResponseDTO registerClient (@Valid @RequestBody ClientRequestDTO clientRequestDTO) {
         return clientService.registerClient(clientRequestDTO);
     }
+
+    @GetMapping("/listAll")
+        public List<ClientResponseDTO> listAllClients() {
+            return clientService.listAllClients();
+        }
 }
