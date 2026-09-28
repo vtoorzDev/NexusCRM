@@ -47,4 +47,9 @@ public class AttendantController {
     public AttendantResponseDTO desactivateAttendant(Long id) {
         return attendantService.desactivateAttendant(id);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteAttendant(@PathVariable Long id) {
+        attendantService.deleteAttendant(id);
+    }
 }
