@@ -31,4 +31,9 @@ public class ClientController {
     public ClientResponseDTO listById(Long id) {
         return clientService.listClientById(id);
     }
+
+    @PutMapping("/update/{id}")
+    public ClientResponseDTO updateClient(@Valid @RequestBody ClientRequestDTO clientRequestDTO, @PathVariable Long id) {
+        return clientService.updateClient(clientRequestDTO, id);
+    }
 }
