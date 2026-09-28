@@ -10,16 +10,16 @@ import lombok.Setter;
 @Setter
 public class AttendantRequestDTO {
 
-    @NotBlank
+    @NotBlank(message = "The name field must be filled in.")
     @Size(min = 3, max = 255)
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "The email field must be filled in.")
     @Email
     @Size(max = 255)
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "The name field must be filled in.")
     @Size(min = 2, max = 100)
     private String role;
 }

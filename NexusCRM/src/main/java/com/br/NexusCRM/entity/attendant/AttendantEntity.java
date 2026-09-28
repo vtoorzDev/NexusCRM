@@ -26,7 +26,7 @@ public class AttendantEntity {
     @Enumerated(EnumType.STRING)
     private AttendantStatus status;
 
-    private enum AttendantStatus {
+    public enum AttendantStatus {
         ACTIVE,
         INACTIVE
     }
