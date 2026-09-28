@@ -25,5 +25,10 @@ public class ClientController {
     @GetMapping("/listAll")
         public List<ClientResponseDTO> listAllClients() {
             return clientService.listAllClients();
-        }
+    }
+
+    @GetMapping("/list/{id}")
+    public ClientResponseDTO listById(Long id) {
+        return clientService.listClientById(id);
+    }
 }
