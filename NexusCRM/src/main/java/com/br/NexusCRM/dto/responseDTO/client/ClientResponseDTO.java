@@ -14,5 +14,5 @@ public class ClientResponseDTO {
     private String phone;
     private String companyClient;
     private LocalDateTime registrationDate;
-    private boolean status;
+    private String status;
 }
