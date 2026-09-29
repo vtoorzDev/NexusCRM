@@ -6,6 +6,7 @@ import com.br.NexusCRM.dto.responseDTO.contact.ContactResponseDTO;
 import com.br.NexusCRM.entity.client.ClientEntity;
 import com.br.NexusCRM.entity.contact.ContactEntity;
 import com.br.NexusCRM.exceptions.client.ClientException;
+import com.br.NexusCRM.exceptions.contact.ContactException;
 import com.br.NexusCRM.repository.client.ClientRepository;
 import com.br.NexusCRM.repository.contact.ContactRepository;
 import jdk.dynalink.Operation;
@@ -67,5 +68,32 @@ public class ContactService {
 
     public List<ContactResponseDTO> listingContact() {
         return contactRepository.findAll().stream().map(this::transformResponse).toList();
+    }
+
+    public ContactResponseDTO listingContactsForId(Long id) {
+        Optional<ContactEntity> contactFound = contactRepository.findById(id);
+
+        if (contactFound.isEmpty()) {
+            throw new ContactException("Contact not found");
+        }
+
+        return transformResponse(contactFound.get());
+    }
+
+    public ContactResponseDTO updateContact(ContactRequestDTO contactRequestDTO, Long id) {
+        Optional<ContactEntity> contactFound = contactRepository.findById(id);
+
+        if (contactFound.isEmpty()) {
+            throw new ContactException("Contact does not exist");
+        }
+
+        ContactEntity contactUpdate = contactFound.get();
+
+        contactUpdate.setDescription(contactRequestDTO.getDescription());
+        contactUpdate.setSubject(contactRequestDTO.getSubject());
+
+        contactRepository.save(contactUpdate);
+
+        return transformResponse(contactUpdate);
     }
 }
