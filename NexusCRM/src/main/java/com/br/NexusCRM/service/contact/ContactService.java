@@ -117,4 +117,22 @@ public class ContactService {
         return transformResponse(contactIsOpen);
 
     }
+
+    public ContactResponseDTO CompletedContact(Long id) {
+        Optional<ContactEntity> contactFound = contactRepository.findById(id);
+
+        if (contactFound.isEmpty()) {
+            throw new ContactException("Contact not found");
+        }
+        ContactEntity completedContact = contactFound.get();
+
+        if (completedContact.getContactStatus() == ContactEntity.ContactStatus.COMPLETED) {
+            throw new ContactException("Contact is already completed");
+        }
+
+        completedContact.setContactStatus(ContactEntity.ContactStatus.COMPLETED);
+        contactRepository.save(completedContact);
+
+        return transformResponse(completedContact);
+    }
 }
