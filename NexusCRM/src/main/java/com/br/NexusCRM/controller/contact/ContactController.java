@@ -24,8 +24,13 @@ public class ContactController {
         return contactService.registerContact(contactRequestDTO, clientId);
     }
 
-    @GetMapping("listAll")
+    @GetMapping("/listAll")
     public List<ContactResponseDTO> listingContacts() {
         return contactService.listingContact();
+    }
+
+    @GetMapping("/findId/{id}")
+    public ContactResponseDTO findById(@PathVariable Long id){
+        return contactService.listingContactsForId(id);
     }
 }
