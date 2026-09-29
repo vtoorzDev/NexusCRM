@@ -38,4 +38,10 @@ public class ContactController {
     public ContactResponseDTO updateContact(@PathVariable Long id, @Valid @RequestBody ContactRequestDTO contactRequestDTO) {
         return contactService.updateContact(contactRequestDTO, id);
     }
+
+    @PutMapping("/activate/{id}")
+    public ContactResponseDTO activateContact(@PathVariable Long id) {
+        return contactService.activateContact(id);
+    }
+
 }
