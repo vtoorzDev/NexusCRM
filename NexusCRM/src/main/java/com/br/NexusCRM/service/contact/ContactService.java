@@ -9,9 +9,11 @@ import com.br.NexusCRM.exceptions.client.ClientException;
 import com.br.NexusCRM.repository.client.ClientRepository;
 import com.br.NexusCRM.repository.contact.ContactRepository;
 import jdk.dynalink.Operation;
+import org.apache.catalina.LifecycleState;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -61,5 +63,9 @@ public class ContactService {
         contactRepository.save(contactEntity);
 
         return transformResponse(contactEntity);
+    }
+
+    public List<ContactResponseDTO> listingContact() {
+        return contactRepository.findAll().stream().map(this::transformResponse).toList();
     }
 }
