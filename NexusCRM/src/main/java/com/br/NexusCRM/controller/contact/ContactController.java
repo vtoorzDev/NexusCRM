@@ -33,4 +33,9 @@ public class ContactController {
     public ContactResponseDTO findById(@PathVariable Long id){
         return contactService.listingContactsForId(id);
     }
+
+    @PutMapping("/update/{id}")
+    public ContactResponseDTO updateContact(@PathVariable Long id, @Valid @RequestBody ContactRequestDTO contactRequestDTO) {
+        return contactService.updateContact(contactRequestDTO, id);
+    }
 }
