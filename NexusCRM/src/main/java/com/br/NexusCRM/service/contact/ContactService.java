@@ -25,6 +25,7 @@ public class ContactService {
     public ContactService(ContactRepository contactRepository, ClientRepository clientRepository) {
         this.contactRepository = contactRepository;
         this.clientRepository = clientRepository;
+
     }
 
     private ContactResponseDTO transformResponse(ContactEntity contactEntity) {
@@ -95,5 +96,25 @@ public class ContactService {
         contactRepository.save(contactUpdate);
 
         return transformResponse(contactUpdate);
+    }
+
+    public ContactResponseDTO activateContact(Long id) {
+        Optional<ContactEntity> contactFound = contactRepository.findById(id);
+
+        if (contactFound.isEmpty()) {
+            throw new ContactException("Contact not found");
+        }
+
+        ContactEntity contactIsOpen = contactFound.get();
+
+        if (contactIsOpen.getContactStatus() == ContactEntity.ContactStatus.OPEN){
+            throw new ContactException("Contact is already open");
+        }
+
+        contactIsOpen.setContactStatus(ContactEntity.ContactStatus.OPEN);
+        contactRepository.save(contactIsOpen);
+
+        return transformResponse(contactIsOpen);
+
     }
 }
