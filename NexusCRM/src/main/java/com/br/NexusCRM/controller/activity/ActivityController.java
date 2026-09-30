@@ -22,8 +22,13 @@ public class ActivityController {
         return activityService.registerActivity(activityRequestDTO, clientId, attendantId);
     }
 
-    @GetMapping("listAll")
+    @GetMapping("/listAll")
     public List<ActivityResponseDTO> listAtivities() {
         return activityService.listAllActivities();
+    }
+
+    @GetMapping("/listPendingActivities")
+    public List<ActivityResponseDTO> listPendingActivities(){
+        return activityService.listPendingActivities();
     }
 }
