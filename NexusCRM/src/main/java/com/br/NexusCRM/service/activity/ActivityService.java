@@ -143,9 +143,14 @@ public class ActivityService {
         }
 
         ActivityEntity activity = activityFound.get();
-        activity.setActivityStatus(ActivityEntity.ActivityStatus.COMPLETED);
 
+        if (activity.getActivityStatus() == ActivityEntity.ActivityStatus.COMPLETED){
+            throw new ActivityException("Activity is already completed");
+        }
+
+        activity.setActivityStatus(ActivityEntity.ActivityStatus.COMPLETED);
         activityRepository.save(activity);
+
         return transformResponse(activity);
     }
 }
