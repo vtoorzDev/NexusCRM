@@ -48,4 +48,8 @@ public class ActivityController {
     public ActivityResponseDTO canceledActivity(@PathVariable Long activityId){
         return activityService.canceledActivity(activityId);
     }
+    @PutMapping("/openAcitivy/{activityId}")
+    public ActivityResponseDTO openActivity(@PathVariable Long activityId) {
+        return activityService.openActivity(activityId);
+    }
 }
