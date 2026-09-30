@@ -13,6 +13,7 @@ import com.br.NexusCRM.repository.contact.ContactRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.IllegalFormatCodePointException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -73,4 +74,10 @@ public class ActivityService {
 
         return transformResponse(activityRegistered);
     }
+
+    public List<ActivityResponseDTO> listAllActivities(){
+        return activityRepository.findAll().stream().map(this::transformResponse).toList();
+    }
+
+    
 }
