@@ -87,4 +87,7 @@ public class ActivityService {
                 .toList();
     }
 
+    public List<ActivityResponseDTO> listPendingActivitiesByAttendant(Long attendantId) {
+        return activityRepository.findByAttendantIdAndActivityStatus(attendantId, ActivityEntity.ActivityStatus.OPEN).stream().map(this::transformResponse).toList();
+    }
 }
