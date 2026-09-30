@@ -36,4 +36,8 @@ public class ActivityController {
     public List<ActivityResponseDTO> listPendingActivitiesAttendant(@PathVariable Long attendantId) {
         return activityService.listPendingActivitiesByAttendant(attendantId);
     }
+    @PutMapping("update/client/{clientId}/attendant/{attendantId}/activity/{activityId}")
+    public ActivityResponseDTO updateActivity(@RequestBody @Valid ActivityRequestDTO activityRequestDTO, @PathVariable Long attendantId, @PathVariable Long clientId, @PathVariable Long activityId){
+        return activityService.updateActivity(activityRequestDTO, attendantId, clientId, activityId);
+    }
 }
