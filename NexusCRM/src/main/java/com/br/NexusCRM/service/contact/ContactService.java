@@ -155,4 +155,14 @@ public class ContactService {
         return transformResponse(inProgressContact);
     }
 
+    public void deleteContact(Long id) {
+        Optional<ContactEntity> contactFound = contactRepository.findById(id);
+
+        if (contactFound.isEmpty()) {
+            throw new ContactException("Contact not found");
+        }
+
+        contactRepository.delete(contactFound.get());
+    }
+
 }
