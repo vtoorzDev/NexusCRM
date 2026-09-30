@@ -153,4 +153,23 @@ public class ActivityService {
 
         return transformResponse(activity);
     }
+
+    public ActivityResponseDTO canceledActivity(Long acvitityId) {
+        Optional<ActivityEntity> activityFound = activityRepository.findById(acvitityId);
+
+        if (activityFound.isEmpty()) {
+            throw new ActivityException("Activity not found");
+        }
+
+        ActivityEntity activity = activityFound.get();
+
+        if (activity.getActivityStatus() == ActivityEntity.ActivityStatus.CANCELED) {
+            throw new ActivityException("Activity is already canceled");
+        }
+
+        activity.setActivityStatus(ActivityEntity.ActivityStatus.CANCELED);
+        activityRepository.save(activity);
+
+        return transformResponse(activity);
+    }
 }
