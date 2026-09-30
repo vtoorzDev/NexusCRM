@@ -1,6 +1,5 @@
 package com.br.NexusCRM.controller.contact;
 
-import com.br.NexusCRM.dto.requestDTO.client.ClientRequestDTO;
 import com.br.NexusCRM.dto.requestDTO.contact.ContactRequestDTO;
 import com.br.NexusCRM.dto.responseDTO.contact.ContactResponseDTO;
 import com.br.NexusCRM.service.contact.ContactService;
