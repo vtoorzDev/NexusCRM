@@ -23,7 +23,7 @@ public class ActivityEntity {
    private String description;
    private LocalDate dueDate;
    public enum ActivityStatus{
-       PENDING,
+       OPEN,
        COMPLETED,
        CANCELED
    }
