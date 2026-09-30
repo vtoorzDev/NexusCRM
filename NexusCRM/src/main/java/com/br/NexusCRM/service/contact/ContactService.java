@@ -136,4 +136,23 @@ public class ContactService {
         return transformResponse(completedContact);
     }
 
+    public ContactResponseDTO progresContact(Long id) {
+        Optional<ContactEntity> contactFound = contactRepository.findById(id);
+
+        if (contactFound.isEmpty()){
+            throw new ContactException("Contact not found");
+        }
+
+        ContactEntity inProgressContact = contactFound.get();
+
+        if (inProgressContact.getContactStatus() == ContactEntity.ContactStatus.IN_PROGRESS) {
+            throw new ContactException("Contact is already in progress");
+        }
+
+        inProgressContact.setContactStatus(ContactEntity.ContactStatus.IN_PROGRESS);
+        contactRepository.save(inProgressContact);
+
+        return transformResponse(inProgressContact);
+    }
+
 }
