@@ -40,4 +40,8 @@ public class ActivityController {
     public ActivityResponseDTO updateActivity(@RequestBody @Valid ActivityRequestDTO activityRequestDTO, @PathVariable Long attendantId, @PathVariable Long clientId, @PathVariable Long activityId){
         return activityService.updateActivity(activityRequestDTO, attendantId, clientId, activityId);
     }
+    @PutMapping("/completeActivity/{activityId}")
+    public ActivityResponseDTO completeActivity(@PathVariable Long activityId){
+        return activityService.completeActivity(activityId);
+    }
 }
