@@ -191,4 +191,15 @@ public class ActivityService {
 
         return transformResponse(activity);
     }
+
+    public void deleteActivity(Long activityId) {
+        Optional<ActivityEntity> activityFound = activityRepository.findById(activityId);
+
+        if (activityFound.isEmpty()) {
+            throw new ActivityException("Activity is not found");
+        }
+
+        ActivityEntity activity = activityFound.get();
+        activityRepository.delete(activity);
+    }
 }
