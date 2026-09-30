@@ -79,5 +79,12 @@ public class ActivityService {
         return activityRepository.findAll().stream().map(this::transformResponse).toList();
     }
 
-    
+    public List<ActivityResponseDTO> listPendingActivities() {
+        return activityRepository
+                .findByActivityStatus(ActivityEntity.ActivityStatus.OPEN)
+                .stream()
+                .map(this::transformResponse)
+                .toList();
+    }
+
 }
