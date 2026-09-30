@@ -31,4 +31,9 @@ public class ActivityController {
     public List<ActivityResponseDTO> listPendingActivities(){
         return activityService.listPendingActivities();
     }
+
+    @GetMapping("/listPendingActivitiesAttendant/{attendantId}")
+    public List<ActivityResponseDTO> listPendingActivitiesAttendant(@PathVariable Long attendantId) {
+        return activityService.listPendingActivitiesByAttendant(attendantId);
+    }
 }
