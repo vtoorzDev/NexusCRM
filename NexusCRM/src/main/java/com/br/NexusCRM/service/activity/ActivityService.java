@@ -134,4 +134,18 @@ public class ActivityService {
 
         return transformResponse(activity);
     }
+
+    public ActivityResponseDTO completeActivity(Long activityId) {
+        Optional<ActivityEntity> activityFound = activityRepository.findById(activityId);
+
+        if (activityFound.isEmpty()) {
+            throw new ActivityException("Activity not found");
+        }
+
+        ActivityEntity activity = activityFound.get();
+        activity.setActivityStatus(ActivityEntity.ActivityStatus.COMPLETED);
+
+        activityRepository.save(activity);
+        return transformResponse(activity);
+    }
 }
