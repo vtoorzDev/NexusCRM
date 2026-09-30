@@ -54,4 +54,9 @@ public class ContactController {
         return contactService.progresContact(id);
     }
 
+    @DeleteMapping("/delete/{id}")
+    public void deleteContact(@PathVariable Long id) {
+        contactService.deleteContact(id);
+    }
+
 }
