@@ -98,7 +98,7 @@ public class ContactService {
         return transformResponse(contactUpdate);
     }
 
-    public ContactResponseDTO activateContact(Long id) {
+    public ContactResponseDTO openContact(Long id) {
         Optional<ContactEntity> contactFound = contactRepository.findById(id);
 
         if (contactFound.isEmpty()) {
@@ -135,4 +135,5 @@ public class ContactService {
 
         return transformResponse(completedContact);
     }
+
 }

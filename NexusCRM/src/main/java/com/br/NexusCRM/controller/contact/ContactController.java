@@ -40,8 +40,8 @@ public class ContactController {
     }
 
     @PutMapping("/activate/{id}")
-    public ContactResponseDTO activateContact(@PathVariable Long id) {
-        return contactService.activateContact(id);
+    public ContactResponseDTO openContact(@PathVariable Long id) {
+        return contactService.openContact(id);
     }
 
     @PutMapping("/completed/{id}")
