@@ -6,6 +6,8 @@ import com.br.NexusCRM.entity.activity.ActivityEntity;
 import com.br.NexusCRM.entity.attendant.AttendantEntity;
 import com.br.NexusCRM.entity.client.ClientEntity;
 import com.br.NexusCRM.exceptions.activity.ActivityException;
+import com.br.NexusCRM.exceptions.attendant.AttendantException;
+import com.br.NexusCRM.exceptions.client.ClientException;
 import com.br.NexusCRM.repository.activity.ActivityRepository;
 import com.br.NexusCRM.repository.attendant.AttendantRepository;
 import com.br.NexusCRM.repository.client.ClientRepository;
@@ -89,5 +91,47 @@ public class ActivityService {
 
     public List<ActivityResponseDTO> listPendingActivitiesByAttendant(Long attendantId) {
         return activityRepository.findByAttendantIdAndActivityStatus(attendantId, ActivityEntity.ActivityStatus.OPEN).stream().map(this::transformResponse).toList();
+    }
+
+    public ActivityResponseDTO updateActivity(ActivityRequestDTO activityRequestDTO, Long attendantId, Long clientId, Long activityId) {
+        Optional<ClientEntity> clientFound = clientRepository.findById(clientId);
+        Optional<AttendantEntity> attendantFound = attendantRepository.findById(attendantId);
+        Optional<ActivityEntity> activityFound = activityRepository.findById(activityId);
+
+        if (clientFound.isEmpty()) {
+            throw new ClientException("Client not found");
+        }
+
+        ClientEntity client = clientFound.get();
+
+        if (client.getClientStatus() == ClientEntity.ClientStatus.INACTIVE){
+            throw new ClientException("Client inactive");
+        }
+
+        if (attendantFound.isEmpty()) {
+            throw new AttendantException("Attendant not found");
+        }
+
+        AttendantEntity attendant = attendantFound.get();
+
+        if (attendant.getStatus() == AttendantEntity.AttendantStatus.INACTIVE) {
+            throw new AttendantException("Attendant inactive");
+        }
+
+        if (activityFound.isEmpty()) {
+            throw new ActivityException("Activity not found");
+        }
+
+        ActivityEntity activity = activityFound.get();
+
+        activity.setClient(client);
+        activity.setAttendant(attendant);
+        activity.setTitle(activityRequestDTO.getTitle());
+        activity.setDescription(activityRequestDTO.getDescription());
+        activity.setDueDate(activityRequestDTO.getDueDate());
+
+        activityRepository.save(activity);
+
+        return transformResponse(activity);
     }
 }
