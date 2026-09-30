@@ -17,7 +17,4 @@ public class ContactRequestDTO {
     @NotBlank
     @Size(min = 3, max = 255)
     private String description;
-
-    @NotNull
-    private Long clientId;
 }

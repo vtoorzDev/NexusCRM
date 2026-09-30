@@ -22,8 +22,8 @@ public class ContactEntity {
     private String description;
     private LocalDate contactDate = LocalDate.now();
 
-    private enum ContactStatus {
-        PENDING,
+    public enum ContactStatus {
+        OPEN,
         IN_PROGRESS,
         COMPLETED
     }
