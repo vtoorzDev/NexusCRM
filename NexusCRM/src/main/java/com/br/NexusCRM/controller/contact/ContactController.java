@@ -44,4 +44,9 @@ public class ContactController {
         return contactService.activateContact(id);
     }
 
+    @PutMapping("/completed/{id}")
+    public ContactResponseDTO completedContact(@PathVariable Long id) {
+        return contactService.CompletedContact(id);
+    }
+
 }
