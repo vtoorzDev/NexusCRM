@@ -154,8 +154,8 @@ public class ActivityService {
         return transformResponse(activity);
     }
 
-    public ActivityResponseDTO canceledActivity(Long acvitityId) {
-        Optional<ActivityEntity> activityFound = activityRepository.findById(acvitityId);
+    public ActivityResponseDTO canceledActivity(Long activityId) {
+        Optional<ActivityEntity> activityFound = activityRepository.findById(activityId);
 
         if (activityFound.isEmpty()) {
             throw new ActivityException("Activity not found");
@@ -168,6 +168,25 @@ public class ActivityService {
         }
 
         activity.setActivityStatus(ActivityEntity.ActivityStatus.CANCELED);
+        activityRepository.save(activity);
+
+        return transformResponse(activity);
+    }
+
+    public ActivityResponseDTO openActivity(Long activityId) {
+        Optional<ActivityEntity> activityFound = activityRepository.findById(activityId);
+
+        if (activityFound.isEmpty()) {
+            throw new ActivityException("Activity not found");
+        }
+
+        ActivityEntity activity = activityFound.get();
+
+        if (activity.getActivityStatus() == ActivityEntity.ActivityStatus.OPEN){
+            throw new ActivityException("Activity is already Open");
+        }
+
+        activity.setActivityStatus(ActivityEntity.ActivityStatus.OPEN);
         activityRepository.save(activity);
 
         return transformResponse(activity);
