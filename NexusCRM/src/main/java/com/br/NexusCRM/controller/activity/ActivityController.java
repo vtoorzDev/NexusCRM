@@ -6,6 +6,8 @@ import com.br.NexusCRM.service.activity.ActivityService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/activities")
 public class ActivityController {
@@ -18,5 +20,10 @@ public class ActivityController {
     @PostMapping("/register/client/{clientId}/attendant/{attendantId}")
     public ActivityResponseDTO registerActivity(@RequestBody @Valid ActivityRequestDTO activityRequestDTO, @PathVariable Long clientId, @PathVariable Long attendantId) {
         return activityService.registerActivity(activityRequestDTO, clientId, attendantId);
+    }
+
+    @GetMapping("listAll")
+    public List<ActivityResponseDTO> listAtivities() {
+        return activityService.listAllActivities();
     }
 }
