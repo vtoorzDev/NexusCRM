@@ -49,4 +49,9 @@ public class ContactController {
         return contactService.CompletedContact(id);
     }
 
+    @PutMapping("/progress/{id}")
+    public ContactResponseDTO progressContact(@PathVariable Long id) {
+        return contactService.progresContact(id);
+    }
+
 }
