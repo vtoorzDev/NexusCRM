@@ -20,13 +20,11 @@ public class ActivityService {
     private final ActivityRepository activityRepository;
     private final ClientRepository clientRepository;
     private final AttendantRepository attendantRepository;
-    private final ContactRepository contactRepository;
 
-    public ActivityService(ActivityRepository activityRepository, ClientRepository clientRepository, AttendantRepository attendantRepository, ContactRepository contactRepository) {
+    public ActivityService(ActivityRepository activityRepository, ClientRepository clientRepository, AttendantRepository attendantRepository) {
         this.activityRepository = activityRepository;
         this.clientRepository = clientRepository;
         this.attendantRepository = attendantRepository;
-        this.contactRepository = contactRepository;
     }
 
     private ActivityResponseDTO transformResponse(ActivityEntity activityEntity) {
